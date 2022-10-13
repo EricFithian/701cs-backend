@@ -15,7 +15,7 @@ router.get('/', async (req, res, next) => {
     }
 });
 
-router.get('/:id/', async (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
     try {
         const foundPost = await Post.findById(req.params.id)
         return res.json(foundPost)

@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { PotentialConnection } = require('../models')
+const { PotentialConnection, Connection } = require('../models')
 
 router.get('/', async (req,res, next)=>{
     try {
@@ -44,6 +44,18 @@ router.delete('/:connectionId', async (req,res, next)=>{
     try{
        let deletedConnection = await PotentialConnection.findByIdAndDelete(req.params.connectionId);
        console.log(deletedConnection);
+    } catch(error){
+        console.log(error);
+        req.error = error;
+        return next();
+    }
+})
+
+router.get('/my-connections/:myId', async (req,res, next)=>{
+    try{
+       let myConnections = await PotentialConnection.find({user1: req.params.myId});
+       console.log(myConnections);
+       return res.json(myConnections)
     } catch(error){
         console.log(error);
         req.error = error;
