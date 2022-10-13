@@ -42,7 +42,7 @@ router.get('/:connectionId', async (req,res, next)=>{
 
 router.get('/my-connections/:myId', async (req,res, next)=>{
     try{
-       let myConnections = await PotentialConnection.find({user1: req.params.myId});
+       let myConnections = await Connection.find({user1: req.params.myId});
        console.log(myConnections);
        return res.json(myConnections)
     } catch(error){
